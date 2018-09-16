@@ -30,9 +30,9 @@ int main() {
 	// 30 -> 10 -> 20
 	list_add(&data3->list, &data_q);
 
-	// Iterate through data_q
-	struct data *d;
-	list_for_each_entry(d, &data_q, list) {
-		printf("%d\n", d->value);
-	}
+	// Print out all data
+	printf("%d -> %d -> %d\n",
+		   container_of(data_q.next, struct data, list)->value,
+		   container_of(data_q.next->next, struct data, list)->value,
+		   container_of(data_q.next->next->next, struct data, list)->value);
 }
