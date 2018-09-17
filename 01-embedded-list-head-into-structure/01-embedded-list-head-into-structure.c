@@ -7,7 +7,8 @@ struct data {
 	int value;
 };
 
-int main() {
+
+void init_by_init_list_head() {
 	// Init list_head
 	struct list_head data_q;
 	INIT_LIST_HEAD(&data_q);
@@ -36,4 +37,31 @@ int main() {
 		   container_of(data_q.next, struct data, list)->value,
 		   container_of(data_q.next->next, struct data, list)->value,
 		   container_of(data_q.next->next->next, struct data, list)->value);
+
+	free(data1);
+	free(data2);
+	free(data3);
+}
+
+void init_by_list_head() {
+	LIST_HEAD(data_q);
+
+	struct data data1, data2, data3;
+	data1.value = 100;
+	data2.value = 200;
+	data3.value = 300;
+
+	list_add_tail(&data1.list, &data_q);
+	list_add_tail(&data2.list, &data_q);
+	list_add_tail(&data3.list, &data_q);
+
+	printf("%d -> %d -> %d\n",
+		   container_of(data_q.next, struct data, list)->value,
+		   container_of(data_q.next->next, struct data, list)->value,
+		   container_of(data_q.next->next->next, struct data, list)->value);
+}	
+
+int main() {
+	init_by_init_list_head();
+	init_by_list_head();
 }
