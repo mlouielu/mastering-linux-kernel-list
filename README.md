@@ -8,6 +8,7 @@ Counting usage in Linux kernel
 ```
  8696, LIST_HEAD(
  7876, list_for_each_entry(
+ 6528, INIT_LIST_HEAD(
  3450, list_for_each_entry_safe(
  2528, list_entry(
  1298, list_first_entry(

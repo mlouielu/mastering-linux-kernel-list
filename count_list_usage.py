@@ -22,6 +22,7 @@ def read_list_header():
             m = re.search(r'(?<=\#define )(list_|LIST_|INIT_|hlist_)\w*\(', i)
             if m:
                 yield m.group()
+    yield 'INIT_LIST_HEAD('
 
 
 def grep_in_kernel_source_and_wc(source_path, method_name):
