@@ -8,10 +8,8 @@ struct data {
 };
 
 int main() {
-	struct list_head data_q;
-
 	// Init
-	INIT_LIST_HEAD(&data_q);
+	LIST_HEAD(data_q);
 	struct data *data1 = malloc(sizeof(struct data));
 	struct data *data2 = malloc(sizeof(struct data));
 	struct data *data3 = malloc(sizeof(struct data));
