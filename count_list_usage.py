@@ -19,10 +19,9 @@ def print_usage():
 def read_list_header():
     with open(LIST_HEADER) as f:
         for i in f.readlines():
-            m = re.search(r'(?<=\#define )(list_|LIST_|INIT_|hlist_)\w*\(', i)
+            m = re.search(r'(list_|LIST_|INIT_|hlist_)\w*\(', i)
             if m:
                 yield m.group()
-    yield 'INIT_LIST_HEAD('
 
 
 def grep_in_kernel_source_and_wc(source_path, method_name):
@@ -40,8 +39,10 @@ if __name__ == '__main__':
 
     d = {}
     for method in read_list_header():
-        count = grep_in_kernel_source_and_wc(sys.argv[1], method)
-        d[method] = count
+        if method not in d:
+            print(method)
+            count = grep_in_kernel_source_and_wc(sys.argv[1], method)
+            d[method] = count
 
     for method, count in sorted(d.items(), key=operator.itemgetter(1), reverse=True):
         print(f'{count: 5d}, {method}')
